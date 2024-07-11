@@ -55,6 +55,51 @@ void placeMines(int mines[][2]){
     int x=random/SIDE;
     int y=random%SIDE;
 
-    
+    //Add the mine if no mine is placed at this position on the board
+    if(mark[random]==false){
+      //Row Index of the mine
+      mines[i][0]=x;
+      //Column Index of the mine
+      mines[i][1]=y;
+
+      //Place the mine
+      board[mines[i][0]][mines[i][1]]= '*';
+      mark[random]=true;
+      i++;
+    }
   }
+  return; 
+}
+
+
+//A function to randomly assign moves
+void assignMoves(int moves[][2], int movesLeft){
+  bool mark[MAXSIDE*MAXSIDE];
+  memset(mark, false, sizeof(mark));
+
+  //Continue until all moves are assigned.
+  for(int i=0; i<movesLeft; i++){
+    int random=rand()%(SIDE*SIDE);
+    int x=random/SIDE;
+    int y=random%SIDE;
+
+    //Add the mine if no mine is placed at this position on the board
+    if(mark[random]==false){
+      //Row Index of the Mine
+      moves[i][0]=x;
+      //column Index of the Mine
+      moves[i][1]=y;
+
+      mark[random]=true;
+      i++;
+    }
+  }
+  return;
+}
+
+//A function to cheat by revealing where the mines are placed
+void cheatMinesweeper(Board& realBoard){
+  cout<<"The mines are located at: "<<endl;
+  realBoard.printBoard();
+  return;
 }
